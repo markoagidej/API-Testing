@@ -4,7 +4,7 @@ from services import employeeService
 from marshmallow import ValidationError
 from utils.util import role_required
 
-@role_required('admin')
+# @role_required('admin')
 def save():
     try:
         employee_data = employee_schema.load(request.json)
