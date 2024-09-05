@@ -7,6 +7,9 @@ class TestEmployeeEndpoints(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
+        self.app.testing = True 
+        self.app_context = app.app_context() 
+        self.app_context.push() 
 
     @patch('services.employeeService.db.session.query')
     def test_employee_get(self, mock_userList):
