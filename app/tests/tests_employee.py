@@ -46,8 +46,9 @@ class TestEmployeeEndpoints(unittest.TestCase):
         # mock_add.return_value = mock_employee
 
         response = save({'name': mock_employee.name, 'position': mock_employee.position})
+        # breakpoint()
         print(f"RESPONSE: {response}")
-        self.assertEqual(response, mock_employee)
+        self.assertEqual({"id": response.id, "name": response.name}, mock_employee.id)
 
 if __name__ == '__main__':
     unittest.main()
