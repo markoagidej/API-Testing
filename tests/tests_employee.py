@@ -7,7 +7,7 @@ class TestEmployeeEndpoints(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.app = create_app('DevelopmentConfig') 
+        cls.app = create_app("DevelopmentConfig") 
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
         cls.client = cls.app.test_client()
@@ -28,8 +28,7 @@ class TestEmployeeEndpoints(unittest.TestCase):
         mock_employee.position = "Test Position"
         mock_employee.id = 1
 
-        response = save({'name': mock_employee.name, 'position': mock_employee.position})
-        print(f"RESPONSE: {response}")
+        response = save({"name": mock_employee.name, "position": mock_employee.position})
         self.assertEqual({"name": response.name, "position": response.position, "id": response.id}, {"name": mock_employee.name, "position": mock_employee.position, "id": mock_employee.id})
 
     # Adds another employee
@@ -40,8 +39,7 @@ class TestEmployeeEndpoints(unittest.TestCase):
         mock_employee.position = "Test Position"
         mock_employee.id = 1
 
-        response = save({'name': mock_employee.name, 'position': mock_employee.position})
-        print(f"RESPONSE: {response}")
+        response = save({"name": mock_employee.name, "position": mock_employee.position})
         self.assertNotEqual({"name": response.name, "position": response.position, "id": response.id}, {"name": mock_employee.name, "position": mock_employee.position, "id": mock_employee.id})
 
     # Test that the 2 added test employees were added correctly and have expected values
@@ -62,5 +60,5 @@ class TestEmployeeEndpoints(unittest.TestCase):
         response = getAll()
         self.assertEqual(mock_data, [{"id": response[0].id, "name": response[0].name, "position": response[0].position}, {"id": response[1].id, "name": response[1].name, "position": response[1].position}])
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
