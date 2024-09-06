@@ -40,20 +40,23 @@ class TestOrderEndpoints(unittest.TestCase):
         mock_order.product_id = 1
         mock_order.quantity = 5
         mock_order.total_price = 10
+        mock_order.id = 1
 
         response = save({"customer_id": mock_order.customer_id, "product_id": mock_order.product_id, "quantity": mock_order.quantity, "total_price": mock_order.total_price})
-        self.assertNotEqual({"customer_id": response.customer_id, "product_id": response.product_id, "quantity": response.quantity, "total_price": response.total_price}, {"customer_id": mock_order.customer_id, "product_id": mock_order.product_id, "quantity": mock_order.quantity, "total_price": mock_order.total_price})
+        self.assertNotEqual({"customer_id": response.customer_id, "product_id": response.product_id, "quantity": response.quantity, "total_price": response.total_price, "id": response.id}, {"customer_id": mock_order.customer_id, "product_id": mock_order.product_id, "quantity": mock_order.quantity, "total_price": mock_order.total_price, "id": mock_order.id})
 
     # Test that the 2 added test orders were added correctly and have expected values
     def test_order_3_get(self):
         mock_data = [
             {
+                "id": 1,
                 "quantity": 5,
                 "customer_id": 1,
                 "product_id": 1,
                 "total_price": 10
              },
             {
+                "id": 2,
                 "quantity": 5,
                 "customer_id": 1,
                 "product_id": 1,
@@ -62,7 +65,7 @@ class TestOrderEndpoints(unittest.TestCase):
         ]
 
         response = getAll()
-        self.assertEqual(mock_data, [{"quantity": response[0].quantity, "customer_id": response[0].customer_id, "product_id": response[0].product_id, "total_price": response[0].total_price}, {"quantity": response[1].quantity, "customer_id": response[1].customer_id, "product_id": response[1].product_id, "total_price": response[1].total_price}])
+        self.assertEqual(mock_data, [{"id": response[0].id, "quantity": response[0].quantity, "customer_id": response[0].customer_id, "product_id": response[0].product_id, "total_price": response[0].total_price}, {"id": response[1].id, "quantity": response[1].quantity, "customer_id": response[1].customer_id, "product_id": response[1].product_id, "total_price": response[1].total_price}])
 
 if __name__ == "__main__":
     unittest.main()

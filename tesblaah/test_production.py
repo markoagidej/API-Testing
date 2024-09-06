@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from app import create_app, db
 from services.productionService import save, getAll
-from datetime import datetime
+from datetime import date
 
 class TestProductionEndpoints(unittest.TestCase):
 
@@ -27,7 +27,7 @@ class TestProductionEndpoints(unittest.TestCase):
         mock_production = MagicMock()
         mock_production.product_id = 1
         mock_production.quantity_produced = 10
-        mock_production.date_produced = datetime(2024, 9, 6, 2, 30)
+        mock_production.date_produced = date(2024, 9, 6)
 
         response = save({"product_id": mock_production.product_id, "quantity_produced": mock_production.quantity_produced, "date_produced": mock_production.date_produced})
         self.assertEqual({"product_id": response.product_id, "quantity_produced": response.quantity_produced, "date_produced": response.date_produced}, {"product_id": mock_production.product_id, "quantity_produced": mock_production.quantity_produced, "date_produced": mock_production.date_produced})
@@ -38,7 +38,7 @@ class TestProductionEndpoints(unittest.TestCase):
         mock_production = MagicMock()
         mock_production.product_id = 1
         mock_production.quantity_produced = 10
-        mock_production.date_produced = datetime(2024, 9, 6, 2, 30)
+        mock_production.date_produced = date(2024, 9, 6)
 
         response = save({"product_id": mock_production.product_id, "quantity_produced": mock_production.quantity_produced, "date_produced": mock_production.date_produced})
         self.assertNotEqual({"product_id": response.product_id, "quantity_produced": response.quantity_produced, "date_produced": response.date_produced}, {"product_id": mock_production.product_id, "quantity_produced": mock_production.quantity_produced, "date_produced": mock_production.date_produced})
@@ -48,13 +48,13 @@ class TestProductionEndpoints(unittest.TestCase):
         mock_data = [
             {
                 "id": 1,
-                "date_produced": datetime(2024, 9, 6, 2, 30),
+                "date_produced": date(2024, 9, 6),
                 "product_id": 1,
                 "quantity_produced": 10
              },
             {
                 "id": 2,
-                "date_produced": datetime(2024, 9, 6, 2, 30),
+                "date_produced": date(2024, 9, 6),
                 "product_id": 1,
                 "quantity_produced": 10
              }
